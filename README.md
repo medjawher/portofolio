@@ -1,4 +1,4 @@
-# Mohamed Jawher Chaouachi — Portfolio
+# Mohamed Jawher Chaouachi Portfolio
 
 Personal portfolio website showcasing my background, skills, education, work experience, and projects as a Software Engineer specializing in Cybersecurity, DevSecOps and AI.
 
