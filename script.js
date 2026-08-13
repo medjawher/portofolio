@@ -1,6 +1,3 @@
-// ================================
-// Mobile menu toggle
-// ================================
 emailjs.init('CnP9iI_E7XJDTkKo4');
 const menuIcon = document.getElementById('menu-icon');
 const navLinks = document.querySelector('.nav-links');
@@ -11,8 +8,6 @@ if (menuIcon && navLinks) {
         menuIcon.classList.toggle('fa-bars');
         menuIcon.classList.toggle('fa-xmark');
     });
-
-    // Close the mobile menu after clicking a link
     navLinks.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
             navLinks.classList.remove('active');
@@ -22,9 +17,7 @@ if (menuIcon && navLinks) {
     });
 }
 
-// ================================
-// Header background on scroll
-// ================================
+
 const header = document.querySelector('header');
 
 window.addEventListener('scroll', () => {
@@ -35,9 +28,6 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// ================================
-// Highlight active nav link based on section in view
-// ================================
 const sections = document.querySelectorAll('section[id]');
 const navLinkEls = document.querySelectorAll('.nav-links a');
 
@@ -63,9 +53,7 @@ function setActiveLink() {
 window.addEventListener('scroll', setActiveLink);
 window.addEventListener('load', setActiveLink);
 
-// ================================
-// "Visit Github" button
-// ================================
+
 const visitBtn = document.querySelector('.visit-btn');
 if (visitBtn) {
     visitBtn.addEventListener('click', () => {
@@ -73,21 +61,16 @@ if (visitBtn) {
     });
 }
 
-
-// ================================
-// "Download CV" button
-// ================================
 const downloadBtn = document.querySelector('.info-box .btn-group .btn:not(.btn-outline)');
 if (downloadBtn) {
     downloadBtn.addEventListener('click', () => {
         const link = document.createElement('a');
-        link.href = 'files/CV_chaouachi_mohamed_jawher.pdf'; // put your CV file at this path
+        link.href = 'files/CV_Chaouachi_Mohamed_Jawher-final_version.pdf'; 
         link.download = 'Jawher_CV.pdf';
         link.click();
     });
 }
 
-// "Contact Me" button in the About section scrolls down to the contact form
 const contactMeBtn = document.querySelector('.info-box .btn-outline');
 if (contactMeBtn) {
     contactMeBtn.addEventListener('click', () => {
@@ -95,9 +78,6 @@ if (contactMeBtn) {
     });
 }
 
-// ================================
-// Contact form handling
-// ================================
 const contactForm = document.getElementById('contactForm');
 
 if (contactForm) {
@@ -114,10 +94,6 @@ if (contactForm) {
             return;
         }
 
-        // --------------------------------------------------------------
-        // OPTION A — no backend yet: open the user's email client with
-        // everything pre-filled. Works immediately, no setup required.
-        // --------------------------------------------------------------
         emailjs.sendForm('service_g5dg72s', 'template_qjqni0v', contactForm)
         .then(() => {
         showFormStatus('Message sent! I\'ll get back to you soon.', 'success');
@@ -126,32 +102,9 @@ if (contactForm) {
         .catch(() => {
         showFormStatus('Something went wrong. Please try again.', 'error');
         });
-        // --------------------------------------------------------------
-        // OPTION B — once you connect a form service (Formspree,
-        // Web3Forms, EmailJS...), replace the block above with a fetch
-        // call, e.g.:
-        //
-        // fetch('https://formspree.io/f/YOUR_FORM_ID', {
-        //     method: 'POST',
-        //     headers: { 'Accept': 'application/json' },
-        //     body: new FormData(contactForm)
-        // })
-        // .then(res => {
-        //     if (res.ok) {
-        //         showFormStatus('Message sent! I\'ll get back to you soon.', 'success');
-        //         contactForm.reset();
-        //     } else {
-        //         showFormStatus('Something went wrong. Please try again.', 'error');
-        //     }
-        // })
-        // .catch(() => showFormStatus('Something went wrong. Please try again.', 'error'));
-        // --------------------------------------------------------------
     });
 }
 
-// ================================
-// Experience & project modals
-// ================================
 function openModal(modal) {
     modal.classList.add('active');
     document.body.classList.add('modal-open');
@@ -170,12 +123,10 @@ document.querySelectorAll('[data-modal-target]').forEach(card => {
 });
 
 document.querySelectorAll('.modal-overlay').forEach(overlay => {
-    // Close via the X button
     const closeBtn = overlay.querySelector('.modal-close');
     if (closeBtn) {
         closeBtn.addEventListener('click', () => closeModal(overlay));
     }
-    // Close by clicking the dark background (not the box itself)
     overlay.addEventListener('click', (e) => {
         if (e.target === overlay) closeModal(overlay);
     });
@@ -187,9 +138,6 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// ================================
-// "Live Demo" buttons -> play project demo video
-// ================================
 const videoModal = document.getElementById('video-modal');
 const demoVideo = document.getElementById('demo-video');
 
@@ -198,7 +146,6 @@ function openVideoModal(src) {
     demoVideo.src = src;
     openModal(videoModal);
     demoVideo.play().catch(() => {
-        // Autoplay can be blocked by the browser; the visible controls let the user hit play manually.
     });
 }
 
@@ -211,8 +158,6 @@ function closeVideoModal() {
 
 document.querySelectorAll('[data-video]').forEach(btn => {
     btn.addEventListener('click', (e) => {
-        // Stop the click from bubbling up to a parent project-card
-        // (which would open the project details modal instead/underneath).
         e.stopPropagation();
         openVideoModal(btn.dataset.video);
     });
@@ -232,8 +177,6 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeVideoModal();
 });
 
-// Clicking a Github Repo / Live Demo button inside a project card should
-// not also open the project card's own details modal underneath it.
 document.querySelectorAll('.project-card .btn-group').forEach(group => {
     group.addEventListener('click', (e) => e.stopPropagation());
 });
